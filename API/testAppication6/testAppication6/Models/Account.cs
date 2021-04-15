@@ -14,7 +14,7 @@ namespace testAppication6.Models
         public Account()
         {
             Billings = new HashSet<Billing>();
-            Shippngs = new HashSet<Shippng>();
+              Shippngs = new HashSet<Shippng>();
         }
 
 

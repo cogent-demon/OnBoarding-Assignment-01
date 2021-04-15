@@ -1,21 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-//using System.Web.Http;
 using testAppication6.Models;
-//using ActionNameAttribute = System.Web.Http.ActionNameAttribute;
-//using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
-//using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
-//using RouteAttribute = System.Web.Http.RouteAttribute;
+
 
 namespace testAppication6.Controllers
 {
+ //Get Data using queries controller
+
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase

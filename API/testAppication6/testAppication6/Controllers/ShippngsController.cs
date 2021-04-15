@@ -9,30 +9,32 @@ using testAppication6.Models;
 
 namespace testAppication6.Controllers
 {
+//API controller for shipping table
+
     [Route("api/[controller]")]
     [ApiController]
     public class ShippngsController : ControllerBase
     {
-        private readonly TestDB1Context _context;
+        private readonly TestDB1Context testDBobj;
         private readonly AccountsController accountsController;
         private readonly TestDB1Context testDB1Context;
         public ShippngsController(TestDB1Context context)
         {
-            _context = context;
+            testDBobj = context;
         }
 
         // GET: api/Shippngs
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Shippng>>> GetShippngs()
         {
-            return await _context.Shippngs.ToListAsync();
+            return await testDBobj.Shippngs.ToListAsync();
         }
 
         // GET: api/Shippngs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Shippng>> GetShippng(int id)
         {
-            var shippng = await _context.Shippngs.FindAsync(id);
+            var shippng = await testDBobj.Shippngs.FindAsync(id);
 
             if (shippng == null)
             {
@@ -49,10 +51,10 @@ namespace testAppication6.Controllers
             AccountsController accres = new AccountsController(testDB1Context);
             shippng.AccId = accres.getAccountResponseID();
 
-            _context.Shippngs.Add(shippng);
+            testDBobj.Shippngs.Add(shippng);
             try
             {
-                await _context.SaveChangesAsync();
+                await testDBobj.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
@@ -69,9 +71,9 @@ namespace testAppication6.Controllers
             return CreatedAtAction("GetShippng", new { id = shippng.ShipId }, shippng);
         }
 
-        private bool ShippngExists(int id)
+        private bool ShippngExists(int id)               //Getting forien key
         {
-            return _context.Shippngs.Any(e => e.ShipId == id);
+            return testDBobj.Shippngs.Any(e => e.ShipId == id);
         }
     }
 }

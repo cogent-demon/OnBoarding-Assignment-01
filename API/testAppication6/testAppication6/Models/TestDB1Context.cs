@@ -7,14 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace testAppication6.Models
 {
     public partial class TestDB1Context : DbContext
-    {
-        
-
-        public TestDB1Context()
-        {
-         }
-
-
+    {   
         public TestDB1Context(DbContextOptions<TestDB1Context> options)
             : base(options)
         {
@@ -101,7 +94,6 @@ namespace testAppication6.Models
             modelBuilder.Entity<Billing>(entity =>
             {
                 entity.HasKey(e => e.BillId);
-                 //   .HasName("PK__Billing__CF6E7D4320159798");
 
                 entity.ToTable("Billing");
 

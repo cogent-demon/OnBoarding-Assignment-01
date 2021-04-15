@@ -9,25 +9,26 @@ using testAppication6.Models;
 
 namespace testAppication6.Controllers
 {
+//API Controller for account table
     [Route("api/[controller]")]
     [ApiController]
     public class AccountsController : ControllerBase
     {
         public static int accountID;
-        private readonly TestDB1Context _context;
+        private readonly TestDB1Context testDBobj;
 
         public AccountsController(TestDB1Context context)
         {
-            _context = context;
+            testDBobj = context;
         }
 
         // GET: api/Accounts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
         {
-            var products = _context.Accounts
+            var products = testDBobj.Accounts
                 .Include(p => p.Billings)
-                .Include(p => p.Shippngs)
+                .Include(q => q.Shippngs)
                 .ToList();
             return products;
             //  return await _context.Accounts.ToListAsync();
@@ -39,25 +40,24 @@ namespace testAppication6.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetAccount(int id)
         {
-            var account = await _context.Accounts.FindAsync(id);
+            var account = await testDBobj.Accounts.FindAsync(id);
 
             if (account == null)
             {
                 return NotFound();
             }
-
             return account;
         }
 
-
+        // Post: api/Accounts
         [HttpPost]
         public async Task<ActionResult<Account>> PostAccount(Account account)
         {
-            _context.Accounts.Add(account);
+            testDBobj.Accounts.Add(account);
             try
             {
               
-                await _context.SaveChangesAsync();
+                await testDBobj.SaveChangesAsync();
 
             }
             catch (DbUpdateException)
@@ -73,19 +73,19 @@ namespace testAppication6.Controllers
                 }
             }
 
-            var ss = CreatedAtAction("GetAccount", new { id = account.AccId }, account);
+            var act = CreatedAtAction("GetAccount", new { id = account.AccId }, account);
             accountID = account.AccId;
-            return ss;
+            return act;
         }
 
 
 
         private bool AccountExists(int id)
         {
-            return _context.Accounts.Any(e => e.AccId == id);
+            return testDBobj.Accounts.Any(e => e.AccId == id);
         }
 
-        public int getAccountResponseID()
+        public int getAccountResponseID()   //return ID forien key of billing and shipping
         {
             return accountID;
         
