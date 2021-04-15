@@ -1,4 +1,5 @@
 <template>
+<!--  Billing dearils inserting page -->
     <div class="st1">
         <b-container fluid>
         <!-- <Logo /> -->
@@ -46,7 +47,7 @@ export default {
         }
     },
     methods:{
-        submitForm(){
+        submitForm(){// button click form submit method, axios for post data
             alert("Do you wish to proceed!");  
             axios.post('https://localhost:44394/api/billings', this.form)
                  .then((res) => {

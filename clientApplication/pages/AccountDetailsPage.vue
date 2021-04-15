@@ -1,4 +1,5 @@
 <template>
+<!--  Account deatils inserting page -->
     <div class="st1">
         <b-container fluid>
         <!-- <Logo /> -->

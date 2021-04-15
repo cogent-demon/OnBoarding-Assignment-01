@@ -1,4 +1,5 @@
-<template>
+<template> 
+<!-- In this file get data from the web api using sql queries.  -->
 <div class="st1">
   <b-container fluid>
         <!-- <Logo /> -->
@@ -6,7 +7,7 @@
         <div class="mt-3">
             <b-button-group>       
             <b-button variant="success">Admin Page</b-button>
-            <b-button href="AccountDetailsPage" variant="info">User Registration Page</b-button>
+            <b-button href="AccountDetailsPage" variant="info">User Registration Page</b-button>  <!--  New page -->
             </b-button-group>
         </div>
         <!-- <div>
@@ -56,11 +57,8 @@
             <td>{{ user.Ship_Address1}}</td>
             <td>{{ user.Ship_Address2}}</td> 
             <td>{{ user.Request}}</td>                     
-            <td>{{ user.Start_Date}}</td>         
-      
-
+            <td>{{ user.Start_Date}}</td>              
             <!-- <td>{{ user.Bill_ID}}</td> -->
-
             </tr>
         </tbody>
         </table>   
@@ -94,7 +92,7 @@ export default {
                 users = response['data']     
             })
             .catch(e => {
-                console.log("Error Please check the connection")  
+                console.log("Error Please check the connection")  //Display error msg in console
 
             });
     },

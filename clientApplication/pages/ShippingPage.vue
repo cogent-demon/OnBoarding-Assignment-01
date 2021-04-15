@@ -1,4 +1,5 @@
 <template>
+<!--  Shipping dearils inserting page -->
     <div class="st1">
         <b-container fluid>
         <!-- <Logo /> -->
@@ -86,7 +87,7 @@ export default {
     methods:{
         submitForm(){
             
-            axios.post('https://localhost:44394/api/shippngs', this.form)
+            axios.post('https://localhost:44394/api/shippngs', this.form)  //axios post method to send data.
                  .then((res) => {
                      
                      //Perform Success Action

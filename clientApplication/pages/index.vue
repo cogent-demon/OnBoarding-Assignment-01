@@ -10,6 +10,7 @@
             </b-button-group>
         </div>
     <div>
+      <pre>{{posts}}</pre>
         <table class="table">
         <thead>
             <tr scope="col">
@@ -31,20 +32,17 @@
              <th>Shipping Address </th>
              <th>Request </th>
              <th>Date </th>
-
-
-
-             
-
-
             </tr>
         </thead>
+<!-- Getting data into a table using axios  -->
         <tbody>
             <tr scope="row" v-for="(user, index) in posts" :key="user.Acc_ID">
+            <td>
+            <pre>{{user.Billings[0]}}</pre></td>
             <td>{{ index + 1 }}</td>
             <td>{{ user.Name}}</td>
-            <td>{{ user.Billings.BillId}}</td>
-            <td>{{ user.ShipId}}</td>
+            <!-- <td>{{ user.Billings[0].[{"BillId"]}} -->
+            <!-- <td>{{ user.Shippngs[0]['ShipId']}}</td> -->
             <td>{{ user.Email}}</td>
             <td>{{ user.EmailSub}}</td>
             <td>{{ user.PhoneCode}}</td>
@@ -53,8 +51,8 @@
             <td>{{ user.AccAddress2}}</td>
             <td>{{ user.AccDistrict}}</td>
             <td>{{ user.AccCity}}</td>
-            <td>{{ user.BillAddress1}}</td>
-            <td>{{ user.BillAddress2}}</td>
+            <!-- <td>{{ user.BillAddress1}}</td> -->
+            <!-- <td>{{ user.Billings[0]["BillAddress1"]}}</td> -->
             <td>{{ user.ShipAddress1}}</td>
             <td>{{ user.ShipAddress2}}</td> 
             <td>{{ user.Request}}</td>                     
@@ -67,14 +65,15 @@
         </tbody>
         </table>   
     </div>
-        <NuxtLink to="AccountDetailsPage">Account Information Page</NuxtLink><br>
+      <NuxtLink to="AccountDetailsPage">Account Information Page</NuxtLink><br>     <!--Link to next page -->
          <NuxtLink to="Accountbackup">Backup</NuxtLink>
   </b-container>
 </div>     
 </template>
 
 <script>
-import axios from 'axios';
+// Importing axios to perform http methods
+import axios from 'axios';  
 
 var users;
 export default {
@@ -89,15 +88,14 @@ export default {
             name2:null
         }
     },
-    created() {
-        axios.get(`https://localhost:44394/api/accounts`)
-            .then(response => {
+    created() { //Get method axios 
+        axios.get(`https://localhost:44394/api/accounts`)            
+            .then(response => { 
                 // JSON responses are automatically parsed.
                 this.posts = response.data    
                 users = response['data']     
             })
             .catch(e => {
-               // this.errors.push(e)
                 console.log("Error Please check the connection")  
 
             });
